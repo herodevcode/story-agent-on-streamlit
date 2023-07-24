@@ -1,6 +1,9 @@
-# Welcome to Streamlit!
+# Welcome to 📚🗺️ Story explorer!
 
-Edit `/streamlit_app.py` to customize this app to your heart's desire. :heart:
+Story explorer is an advanced story researcher AI with an expansive
+knowledge base that covers countless works of
+world literature and pop culture.
 
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
+Drop your ideas for your story and
+our research agent will find several exisiting story
+similar to your ideas.
