@@ -106,7 +106,7 @@ def generate_response(input_text, overall_chain):
     st.markdown(response['output'])
 
 with st.form('my_form'):
-    text = st.text_area('Enter text:', 'Drop you ideas and I will find relevant story. Example: Man goes into multiverse to find his alter version of himself.')
+    text = st.text_area('Enter text:', 'Drop you ideas and I will find relevant story. Example: A man goes into multiverse to find his alter version of himself.')
     submitted = st.form_submit_button('Submit')
     if not openai_api_key.startswith('sk-'):
         st.warning('Please enter your OpenAI API key!', icon='⚠')
