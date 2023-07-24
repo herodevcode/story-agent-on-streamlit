@@ -1,6 +1,7 @@
 import streamlit as st
 from langchain import OpenAI
 from langchain.agents import initialize_agent, Tool
+from langchain.callbacks import StreamlitCallbackHandler
 from langchain.chains import LLMChain, SimpleSequentialChain
 from langchain.prompts import PromptTemplate
 from langchain.tools import DuckDuckGoSearchRun, WikipediaQueryRun
@@ -79,7 +80,7 @@ def create_llm(openai_api_key):
             multi-dimensional clustering algorithms, from different genres and time periods.
             You should identify narratives and storytelling techniques.
 
-            Upon completion of this process, return list of story you analyzed.
+            Upon completion of this process, return list of story you analyzed in structured markdown text format.
             A list should includes 'Title', 'Author', 'Genre', 'Publication Year', 
             'Summary', 'Similarity Score', 'Storytelling frameworks' and 'Key takeaway from the story'. 
             ///
@@ -100,11 +101,12 @@ def create_llm(openai_api_key):
     return overall_chain
 
 def generate_response(input_text, overall_chain):
-    response = overall_chain(input_text)
-    st.info(response['output'])
+    st_callback = StreamlitCallbackHandler(st.container())
+    response = overall_chain(input_text, callbacks=[st_callback])
+    st.markdown(response['output'])
 
 with st.form('my_form'):
-    text = st.text_area('Enter text:', 'Drop you ideas and I will find relevant story')
+    text = st.text_area('Enter text:', 'Drop you ideas and I will find relevant story. Example: Man goes into multiverse to find his alter version of himself.')
     submitted = st.form_submit_button('Submit')
     if not openai_api_key.startswith('sk-'):
         st.warning('Please enter your OpenAI API key!', icon='⚠')
